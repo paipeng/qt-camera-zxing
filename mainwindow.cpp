@@ -3,9 +3,14 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow), camera1(0, this)
+    , ui(new Ui::MainWindow), camera1(0, this), camera2(1, this)
 {
     ui->setupUi(this);
+
+    ui->camera2ComboBox->setCurrentIndex(1);
+    initCameras();
+    ui->statusbar->showMessage(tr("app_info"));
+
 }
 
 MainWindow::~MainWindow()
@@ -17,7 +22,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::cameraState(int cameraId, int state) {
     qDebug() << "cameraState: " << cameraId << " state: " << state;
-#if 0
+#if 1
     if (state == 0) {
         if (cameraId == 0) {
             ui->camera1StartButton->setText(tr("start"));
@@ -59,7 +64,6 @@ void MainWindow::processCapturedImage(int cameraId, const QImage& img) {
 
 void MainWindow::cameraReadyForCapture(int cameraId, bool ready) {
     qDebug() << "cameraReadyForCapture: " << cameraId << " state: " << ready;
-#if 0
     if (ready) {
         if (cameraId == 0) {
             camera1.takeImage();
@@ -70,6 +74,98 @@ void MainWindow::cameraReadyForCapture(int cameraId, bool ready) {
             }
         }
     }
+}
+
+
+
+void MainWindow::initCameras() {
+    qDebug() << "initCameras";
+    const QList<QCameraInfo> availableCameras = CPCamera::getAvailableCamersInfos();
+
+    int index = 0;
+    for (const QCameraInfo &cameraInfo : availableCameras) {
+        ui->camera1ComboBox->addItem(cameraInfo.description(), index);
+        ui->camera2ComboBox->addItem(cameraInfo.description(), index);
+        index ++;
+    }
+}
+
+
+const QCameraInfo MainWindow::getSelectedCameraInfo(int source) {
+    qDebug() << "getSelectedCameraInfo: " << source;
+    const QList<QCameraInfo> availableCameras = CPCamera::getAvailableCamersInfos();
+
+    QComboBox* comboBox = NULL;
+    if (source == 0) {
+        comboBox = ui->camera1ComboBox;
+    } else {
+        comboBox = ui->camera2ComboBox;
+    }
+
+    int index = 0;
+    for (const QCameraInfo &cameraInfo : availableCameras) {
+        if (index== comboBox->currentIndex()) {
+            qDebug() << "selected camera found: " << cameraInfo.description();
+            return cameraInfo;
+        }
+        index++;
+    }
+    QCameraInfo defaultCameraInfo;
+    return defaultCameraInfo;
+}
+
+void MainWindow::startCamera1() {
+    qDebug() << "startCamera1";
+    camera1.startCamera();
+}
+
+void MainWindow::startCamera2() {
+    qDebug() << "startCamera2";
+    ui->camera2Label->setText(QString("Starting..."));
+    //camera2.startCamera();
+
+}
+
+void MainWindow::camera1Changed(int index) {
+    qDebug() << "camera1Changed: " << index;
+    camera1.setCamera(getSelectedCameraInfo(0), ui->camera1Viewfinder);
+}
+
+void MainWindow::camera2Changed(int index) {
+    qDebug() << "camera2Changed: " << index;
+    camera2.setCamera(getSelectedCameraInfo(1), ui->camera2Viewfinder);
+}
+
+
+void MainWindow::updateBarcodeDecodeResult(int decodeState) {
+    Q_UNUSED(decodeState);
+    qDebug() << "updateBarcodeDecodeResult: " << decodeState;
+#if 0
+    if (decodeState == 0) {
+        for (auto&& result : barcodeDecoder.decodeResults) {
+            qDebug() << "RESULT: " << result.text();
+            QString text = QString::fromWCharArray(result.text().c_str());
+            ui->camera1Label->setText(text);
+        }
+    } else {
+        ui->camera1Label->setText(QString(""));
+    }
 #endif
 }
 
+
+void MainWindow::displayViewfinder(int cameraId) {
+    if (cameraId == 0) {
+        ui->camera1StackedWidget->setCurrentIndex(0);
+    } else {
+        ui->camera2StackedWidget->setCurrentIndex(0);
+    }
+}
+
+void MainWindow::displayCapturedImage(int cameraId) {
+    if (cameraId == 0) {
+        ui->camera1StackedWidget->setCurrentIndex(1);
+    } else {
+        ui->camera2StackedWidget->setCurrentIndex(1);
+    }
+}

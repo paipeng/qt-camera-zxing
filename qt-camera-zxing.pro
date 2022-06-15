@@ -25,6 +25,10 @@ TRANSLATIONS += \
 CONFIG += lrelease
 CONFIG += embed_translations
 
+
+RESOURCES += \
+    qt-camera-zxing.qrc
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
@@ -36,7 +40,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 INCLUDEPATH += $$PWD/../cp_qt_camera/
 DEPENDPATH += $$PWD/libs/x64
 
-win32:CONFIG (release, debug|release): LIBS += -L$$PWD/build-MyLibrary/ -lcp_qt_camera
-else:win32:CONFIG (debug, debug|release): LIBS += -L$$PWD/build-MyLibrary/ -lcp_qt_camera
-else:unix: LIBS += -L$$PWD/libs/x64 -lcp_qt_camera.1.0.0
+win32:CONFIG (release, debug|release): LIBS += -L$$PWD/libs/x64/ -lcp_qt_camera
+else:win32:CONFIG (debug, debug|release): LIBS += -L$$PWD/libs/x64/ -lcp_qt_camera
+else:unix: LIBS += -L$$PWD/libs/x64/ -lcp_qt_camera.1
 
+DYLD_LIBRARY_PATH += -L$$PWD/libs/x64/

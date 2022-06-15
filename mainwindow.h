@@ -19,17 +19,31 @@ public:
     ~MainWindow();
 
 
+private slots:
+    void initCameras();
+    void startCamera1();
+    void startCamera2();
+    const QCameraInfo getSelectedCameraInfo(int source);
+    void camera1Changed(int index);
+    void camera2Changed(int index);
+    void updateBarcodeDecodeResult(int decodeState);
+
 private:
     void cameraState(int cameraId, int state) override;
     void processCapturedImage(int cameraId, const QImage& img) override;
     void cameraReadyForCapture(int cameraId, bool ready) override;
 
+
+private:
+    void displayViewfinder(int cameraId);
+    void displayCapturedImage(int cameraId);
+
 private:
     Ui::MainWindow *ui;
 
     CPCamera camera1;
-    //CPCamera camera2;
+    CPCamera camera2;
     bool camera1AutoCapture;
-    //bool camera2AutoCapture;
+    bool camera2AutoCapture;
 };
 #endif // MAINWINDOW_H

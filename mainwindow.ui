@@ -6,17 +6,296 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>960</width>
     <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>CameraWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar"/>
+  <property name="windowIcon">
+   <iconset resource="qt-camera-zxing.qrc">
+    <normaloff>:/images/shutter.svg</normaloff>:/images/shutter.svg</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>941</width>
+      <height>541</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="header">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="qt-camera-zxing.qrc">:/images/header.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <layout class="QVBoxLayout" name="camera1VerticalLayout">
+         <item>
+          <widget class="QStackedWidget" name="camera1StackedWidget">
+           <property name="currentIndex">
+            <number>0</number>
+           </property>
+           <widget class="QWidget" name="page">
+            <widget class="CPCameraViewfinder" name="camera1Viewfinder" native="true">
+             <property name="geometry">
+              <rect>
+               <x>5</x>
+               <y>5</y>
+               <width>440</width>
+               <height>330</height>
+              </rect>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>440</width>
+               <height>330</height>
+              </size>
+             </property>
+            </widget>
+           </widget>
+           <widget class="QWidget" name="preview1">
+            <widget class="QLabel" name="preview1Label">
+             <property name="geometry">
+              <rect>
+               <x>5</x>
+               <y>5</y>
+               <width>440</width>
+               <height>330</height>
+              </rect>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>440</width>
+               <height>330</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="qt-camera-zxing.qrc">:/images/logo.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </widget>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="camera1Label">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="camera1ComboBox"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="camera1StartButton">
+           <property name="text">
+            <string>start</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="camera2VerticalLayout">
+         <item>
+          <widget class="QStackedWidget" name="camera2StackedWidget">
+           <widget class="QWidget" name="page_3">
+            <widget class="CPCameraViewfinder" name="camera2Viewfinder" native="true">
+             <property name="geometry">
+              <rect>
+               <x>5</x>
+               <y>5</y>
+               <width>440</width>
+               <height>330</height>
+              </rect>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>440</width>
+               <height>330</height>
+              </size>
+             </property>
+            </widget>
+           </widget>
+           <widget class="QWidget" name="preview2">
+            <widget class="QLabel" name="preview2Label">
+             <property name="geometry">
+              <rect>
+               <x>5</x>
+               <y>5</y>
+               <width>440</width>
+               <height>330</height>
+              </rect>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>440</width>
+               <height>330</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="qt-camera-zxing.qrc">:/images/logo.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </widget>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="camera2Label">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="camera2ComboBox"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="camera2StartButton">
+           <property name="text">
+            <string>start</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>960</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
- <connections/>
+ <customwidgets>
+  <customwidget>
+   <class>CPCameraViewfinder</class>
+   <extends>QWidget</extends>
+   <header location="global">cpcameraviewfinder.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="qt-camera-zxing.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>camera1StartButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>startCamera1()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>198</x>
+     <y>365</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>camera2StartButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>startCamera2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>602</x>
+     <y>365</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>camera1ComboBox</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>camera1Changed(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>207</x>
+     <y>375</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>camera2ComboBox</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>camera2Changed(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>576</x>
+     <y>375</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>startCamera1()</slot>
+  <slot>startCamera2()</slot>
+  <slot>camera1Changed(int)</slot>
+  <slot>camera2Changed(int)</slot>
+ </slots>
 </ui>
