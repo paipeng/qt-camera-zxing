@@ -1,5 +1,7 @@
 QT       += core gui
 
+QT += multimediawidgets
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -27,3 +29,14 @@ CONFIG += embed_translations
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+
+
+
+INCLUDEPATH += $$PWD/../cp_qt_camera/
+DEPENDPATH += $$PWD/libs/x64
+
+win32:CONFIG (release, debug|release): LIBS += -L$$PWD/build-MyLibrary/ -lcp_qt_camera
+else:win32:CONFIG (debug, debug|release): LIBS += -L$$PWD/build-MyLibrary/ -lcp_qt_camera
+else:unix: LIBS += -L$$PWD/libs/x64 -lcp_qt_camera.1.0.0
+
