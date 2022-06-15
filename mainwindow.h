@@ -5,6 +5,7 @@
 
 
 #include "cpcamera.h"
+#include "cpbarcode.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -45,5 +46,7 @@ private:
     CPCamera camera2;
     bool camera1AutoCapture;
     bool camera2AutoCapture;
+
+    CPBarcode barcode;
 };
 #endif // MAINWINDOW_H

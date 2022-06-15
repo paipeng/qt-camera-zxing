@@ -11,7 +11,11 @@ MainWindow::MainWindow(QWidget *parent)
     initCameras();
     ui->statusbar->showMessage(tr("app_info"));
 
+    QObject::connect(&barcode, &CPBarcode::updateBarcodeDecodeResult, this, &MainWindow::updateBarcodeDecodeResult);
+    barcode.start();
+    barcode.setPriority(QThread::LowestPriority);
 }
+
 
 MainWindow::~MainWindow()
 {
