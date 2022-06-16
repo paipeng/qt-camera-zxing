@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    camera1.stopCamera();
+    barcode.stop();
     delete ui;
 }
 
