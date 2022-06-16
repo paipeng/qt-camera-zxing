@@ -10,19 +10,37 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="115"/>
-        <location filename="mainwindow.ui" line="185"/>
+        <location filename="mainwindow.ui" line="140"/>
+        <location filename="mainwindow.ui" line="159"/>
         <source>TextLabel</source>
         <translation type="unfinished">测试</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="125"/>
-        <location filename="mainwindow.ui" line="195"/>
-        <location filename="mainwindow.cpp" line="28"/>
-        <location filename="mainwindow.cpp" line="30"/>
-        <location filename="mainwindow.cpp" line="35"/>
-        <location filename="mainwindow.cpp" line="38"/>
+        <location filename="mainwindow.ui" line="168"/>
+        <source>image_auth</source>
+        <translation type="unfinished">图像验证</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="180"/>
+        <source>product</source>
+        <translation type="unfinished">产品</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="203"/>
+        <source>auth_result</source>
+        <translation type="unfinished">验证结果</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="226"/>
+        <source>register</source>
+        <translation type="unfinished">注册新图片</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="249"/>
+        <location filename="mainwindow.cpp" line="34"/>
+        <location filename="mainwindow.cpp" line="41"/>
         <source>start</source>
-        <translation type="unfinished">开始</translation>
+        <translation type="unfinished">开启摄像头</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="12"/>
@@ -30,8 +48,7 @@
         <translation type="unfinished">Demo @2022 Pai Peng (sipaipv6@gmail.com)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="43"/>
-        <location filename="mainwindow.cpp" line="45"/>
+        <location filename="mainwindow.cpp" line="49"/>
         <source>stop</source>
         <translation type="unfinished">关闭</translation>
     </message>

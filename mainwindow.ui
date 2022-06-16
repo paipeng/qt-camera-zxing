@@ -116,84 +116,139 @@
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QComboBox" name="camera1ComboBox"/>
-         </item>
-         <item>
-          <widget class="QPushButton" name="camera1StartButton">
-           <property name="text">
-            <string>start</string>
-           </property>
-          </widget>
-         </item>
         </layout>
        </item>
        <item>
         <layout class="QVBoxLayout" name="camera2VerticalLayout">
          <item>
-          <widget class="QStackedWidget" name="camera2StackedWidget">
-           <widget class="QWidget" name="page_3">
-            <widget class="CPCameraViewfinder" name="camera2Viewfinder" native="true">
-             <property name="geometry">
-              <rect>
-               <x>5</x>
-               <y>5</y>
-               <width>440</width>
-               <height>330</height>
-              </rect>
-             </property>
-             <property name="maximumSize">
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QLabel" name="cropLabel">
+             <property name="minimumSize">
               <size>
-               <width>440</width>
-               <height>330</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
-            </widget>
-           </widget>
-           <widget class="QWidget" name="preview2">
-            <widget class="QLabel" name="preview2Label">
-             <property name="geometry">
-              <rect>
-               <x>5</x>
-               <y>5</y>
-               <width>440</width>
-               <height>330</height>
-              </rect>
-             </property>
              <property name="maximumSize">
               <size>
-               <width>440</width>
-               <height>330</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
              <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap resource="qt-camera-zxing.qrc">:/images/logo.png</pixmap>
-             </property>
-             <property name="scaledContents">
-              <bool>true</bool>
+              <string>TextLabel</string>
              </property>
             </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="registeredLabel">
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="imageGroupBox">
+           <property name="title">
+            <string>image_auth</string>
+           </property>
+           <widget class="QLabel" name="label">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>60</width>
+              <height>16</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>product</string>
+            </property>
            </widget>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="camera2Label">
-           <property name="text">
-            <string>TextLabel</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="camera2ComboBox"/>
-         </item>
-         <item>
-          <widget class="QPushButton" name="camera2StartButton">
-           <property name="text">
-            <string>start</string>
-           </property>
+           <widget class="QLineEdit" name="lineEdit">
+            <property name="geometry">
+             <rect>
+              <x>80</x>
+              <y>20</y>
+              <width>321</width>
+              <height>21</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_2">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>50</y>
+              <width>60</width>
+              <height>16</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>auth_result</string>
+            </property>
+           </widget>
+           <widget class="QLineEdit" name="lineEdit_2">
+            <property name="geometry">
+             <rect>
+              <x>80</x>
+              <y>50</y>
+              <width>321</width>
+              <height>21</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="registerButton">
+            <property name="geometry">
+             <rect>
+              <x>310</x>
+              <y>80</y>
+              <width>101</width>
+              <height>31</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>register</string>
+            </property>
+           </widget>
+           <widget class="QComboBox" name="camera1ComboBox">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>170</y>
+              <width>261</width>
+              <height>32</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="camera1StartButton">
+            <property name="geometry">
+             <rect>
+              <x>270</x>
+              <y>170</y>
+              <width>91</width>
+              <height>32</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>start</string>
+            </property>
+           </widget>
           </widget>
          </item>
         </layout>
@@ -244,7 +299,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>camera2StartButton</sender>
+   <sender>registerButton</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>startCamera2()</slot>
@@ -267,22 +322,6 @@
    <hints>
     <hint type="sourcelabel">
      <x>207</x>
-     <y>375</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>camera2ComboBox</sender>
-   <signal>currentIndexChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>camera2Changed(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>576</x>
      <y>375</y>
     </hint>
     <hint type="destinationlabel">
