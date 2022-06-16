@@ -3,7 +3,7 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow), camera1(0, this), camera2(1, this)
+    , ui(new Ui::MainWindow), camera1(0, this), camera2(1, this), camera1AutoCapture(true)
 {
     ui->setupUi(this);
 
@@ -54,13 +54,20 @@ void MainWindow::cameraState(int cameraId, int state) {
 }
 
 void MainWindow::processCapturedImage(int cameraId, const QImage& img) {
-    //qDebug() << "processCapturedImage: " << cameraId << " img: " << img.width() << "-" << img.height();
+    qDebug() << "processCapturedImage: " << cameraId << " img: " << img.width() << "-" << img.height() << " " << img.format();
 #if 0
+    QImage image;
+    bool success = image.load("/Users/paipeng/Downloads/zxing-enc.png");
+    qDebug() << "File loaded succesfully " << success ;
+#endif
+    //img.save ("preview.bmp", "bmp");
+    QImage small = img.scaled(img.width()/4, img.height()/4);
+#if 1
     timer.start();
     if (cameraId == 0) {
-        barcodeDecoder.setImage(img);
+        barcode.setImage(small);
     } else {
-        arcFaceEngine.setImage(img);
+        //arcFaceEngine.setImage(img);
     }
 #endif
 }
@@ -144,16 +151,19 @@ void MainWindow::camera2Changed(int index) {
 void MainWindow::updateBarcodeDecodeResult(int decodeState) {
     Q_UNUSED(decodeState);
     qDebug() << "updateBarcodeDecodeResult: " << decodeState;
-#if 0
+#if 1
     if (decodeState == 0) {
-        for (auto&& result : barcodeDecoder.decodeResults) {
-            qDebug() << "RESULT: " << result.text();
+        for (auto&& result : barcode.decodeResults) {
+            //qDebug() << "RESULT: " << result.text();
             QString text = QString::fromWCharArray(result.text().c_str());
+            qDebug() << "RESULT: " << text;
             ui->camera1Label->setText(text);
         }
     } else {
         ui->camera1Label->setText(QString(""));
     }
+
+    //camera1.takeImage();
 #endif
 }
 

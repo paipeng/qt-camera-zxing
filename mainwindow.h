@@ -48,5 +48,7 @@ private:
     bool camera2AutoCapture;
 
     CPBarcode barcode;
+
+    QElapsedTimer timer;
 };
 #endif // MAINWINDOW_H
