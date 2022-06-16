@@ -57,20 +57,17 @@ void MainWindow::cameraState(int cameraId, int state) {
 
 void MainWindow::processCapturedImage(int cameraId, const QImage& img) {
     qDebug() << "processCapturedImage: " << cameraId << " img: " << img.width() << "-" << img.height() << " " << img.format();
-#if 0
-    QImage image;
-    bool success = image.load("/Users/paipeng/Downloads/zxing-enc.png");
-    qDebug() << "File loaded succesfully " << success ;
-#endif
     //img.save ("preview.bmp", "bmp");
     QImage small = img.scaled(img.width()/4, img.height()/4);
-#if 1
     timer.start();
+#if 1
     if (cameraId == 0) {
-        barcode.setImage(small);
+        barcode.setImage(img);
     } else {
         //arcFaceEngine.setImage(img);
     }
+#else
+    camera1.takeImage();
 #endif
 }
 
@@ -152,20 +149,36 @@ void MainWindow::camera2Changed(int index) {
 
 void MainWindow::updateBarcodeDecodeResult(int decodeState) {
     Q_UNUSED(decodeState);
-    qDebug() << "updateBarcodeDecodeResult: " << decodeState;
+    qint64 t = timer.elapsed();
+    qDebug() << "updateBarcodeDecodeResult: " << decodeState << "time: " << t;
 #if 1
     if (decodeState == 0) {
+        qDebug() << "RESULT size: " << barcode.decodeResults.size();
+#if 1
         for (auto&& result : barcode.decodeResults) {
-            //qDebug() << "RESULT: " << result.text();
-            QString text = QString::fromWCharArray(result.text().c_str());
-            qDebug() << "RESULT: " << text;
-            ui->camera1Label->setText(text);
+            qDebug() << "RESULT: " << result.isValid();
+
+            if (result.isValid()) {
+                QString text = QString::fromWCharArray(result.text().c_str());
+                qDebug() << "RESULT: " << text;
+                qDebug() << "Position: " << result.position().size();
+                for (auto&& point : result.position()) {
+                    qDebug() << "Point: " << point.x << "-" << point.y;
+                }
+                qDebug() << "Status: " << (int)result.status();
+                qDebug() << "Ecc: " << result.ecLevel().c_str();
+                qDebug() << "Format: " << (int)result.format();
+                ui->camera1Label->setText(text);
+                break;
+            }
         }
+#endif
     } else {
         ui->camera1Label->setText(QString(""));
+
+        camera1.takeImage();
     }
 
-    //camera1.takeImage();
 #endif
 }
 
