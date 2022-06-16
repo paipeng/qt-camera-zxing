@@ -60,11 +60,11 @@ void MainWindow::processCapturedImage(int cameraId, const QImage& img) {
     //img.save ("preview.bmp", "bmp");
     imageSize.setWidth(img.width());
     imageSize.setHeight(img.height());
-    QImage small = img.scaled(img.width()/resizeFactor, img.height()/resizeFactor);
+    //QImage small = img.scaled(img.width()/resizeFactor, img.height()/resizeFactor);
     timer.start();
 #if 1
     if (cameraId == 0) {
-        barcode.setImage(small);
+        barcode.setImage(img, resizeFactor);
     } else {
         //arcFaceEngine.setImage(img);
     }
@@ -194,6 +194,37 @@ void MainWindow::updateBarcodeDecodeResult(int decodeState) {
         }
         ui->camera1Viewfinder->setText(text);
         ui->camera1Viewfinder->setPoints(points);
+
+
+        QImage image = barcode.getImage();
+        qDebug() << "image size: " << image.size();
+
+        // crop
+        /*
+         *
+         * QRect rect(10, 20, 30, 40);
+            QPixmap original('image.png');
+            QPixmap cropped = original.copy(rect);
+         * */
+
+
+        QVector<QPoint> cropPoints;
+        for (auto&& point : barcode.decodeResult.position()) {
+            cropPoints.append(QPoint(point.x * resizeFactor , point.y * resizeFactor));
+        }
+
+        QRect rect(cropPoints.at(0).x(), cropPoints.at(0).y(), cropPoints.at(1).x() - cropPoints.at(0).x(), cropPoints.at(2).y() - cropPoints.at(1).y());
+
+        qDebug() << "crop rect: " << rect;
+
+        QImage cropped = image.copy(rect);
+
+        QPixmap pixmap = QPixmap::fromImage(cropped);
+
+        int w = ui->cropLabel->width();
+        int h = ui->cropLabel->height();
+
+        ui->cropLabel->setPixmap(pixmap.scaled(w,h,Qt::KeepAspectRatio));
 
 #endif
     } else {
