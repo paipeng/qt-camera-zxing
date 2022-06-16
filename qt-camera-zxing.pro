@@ -53,5 +53,14 @@ win32:CONFIG (release, debug|release): LIBS += -L$$PWD/libs/x64/ -lcp_qt_camera 
 else:win32:CONFIG (debug, debug|release): LIBS += -L$$PWD/libs/x64/ -lcp_qt_camera -lcp-qt-barcode.1.0.0
 else:unix: LIBS += -L$$PWD/libs/x64/ -lcp_qt_camera.1 -lcp-qt-barcode.1 -L$$PWD/../cp-qt-barcode/libs/x64/
 
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/libs/x64/release/ -lZXing
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/libs/x64/debug/ -lZXing
+else:unix: LIBS += -L$$PWD/libs/x64/ -lZXing.1
+
+
+
+
 DYLD_LIBRARY_PATH += -L$$PWD/libs/x64/
 DYLD_LIBRARY_PATH += -L$$PWD/../cp-qt-barcode/libs/x64/
