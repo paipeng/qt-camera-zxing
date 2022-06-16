@@ -50,5 +50,7 @@ private:
     CPBarcode barcode;
 
     QElapsedTimer timer;
+    float resizeFactor;
+    QSize imageSize;
 };
 #endif // MAINWINDOW_H

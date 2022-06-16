@@ -3,7 +3,7 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow), camera1(0, this), camera2(1, this), camera1AutoCapture(true)
+    , ui(new Ui::MainWindow), camera1(0, this), camera2(1, this), camera1AutoCapture(true), resizeFactor(3)
 {
     ui->setupUi(this);
 
@@ -58,7 +58,9 @@ void MainWindow::cameraState(int cameraId, int state) {
 void MainWindow::processCapturedImage(int cameraId, const QImage& img) {
     qDebug() << "processCapturedImage: " << cameraId << " img: " << img.width() << "-" << img.height() << " " << img.format();
     //img.save ("preview.bmp", "bmp");
-    QImage small = img.scaled(img.width()/4, img.height()/4);
+    imageSize.setWidth(img.width());
+    imageSize.setHeight(img.height());
+    QImage small = img.scaled(img.width()/resizeFactor, img.height()/resizeFactor);
     timer.start();
 #if 1
     if (cameraId == 0) {
@@ -181,13 +183,24 @@ void MainWindow::updateBarcodeDecodeResult(int decodeState) {
             qDebug() << "Point: " << point.x << "-" << point.y;
         }
         qDebug() << "Status: " << (int)barcode.decodeResult.status();
-        qDebug() << "Ecc: " << barcode.decodeResult.ecLevel().c_str();
+        qDebug() << "Ecc: " << QString::fromWCharArray(barcode.decodeResult.ecLevel().c_str());
         qDebug() << "Format: " << (int)barcode.decodeResult.format();
         ui->camera1Label->setText(text);
+
+        QVector<QPoint> points;
+        QSize viewFinderSize = ui->camera1Viewfinder->getSize();
+        for (auto&& point : barcode.decodeResult.position()) {
+            points.append(QPoint(point.x * resizeFactor* viewFinderSize.width()/imageSize.width() , point.y * resizeFactor* viewFinderSize.height()/imageSize.height() ));
+        }
+        ui->camera1Viewfinder->setText(text);
+        ui->camera1Viewfinder->setPoints(points);
 
 #endif
     } else {
         ui->camera1Label->setText(QString(""));
+        QVector<QPoint> points;
+        ui->camera1Viewfinder->setText(QString("No detected"));
+        ui->camera1Viewfinder->setPoints(points);
 
     }
     camera1.takeImage();
