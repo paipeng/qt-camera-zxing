@@ -175,16 +175,16 @@ void MainWindow::updateBarcodeDecodeResult(int decodeState) {
 #else
         QString text = QString::fromWCharArray(barcode.decodeResult.text().c_str());
         qDebug() << "RESULT: " << text;
-        /*
-        qDebug() << "Position: " << result.position().size();
-        for (auto&& point : result.position()) {
+
+        qDebug() << "Position: " << barcode.decodeResult.position().size();
+        for (auto&& point : barcode.decodeResult.position()) {
             qDebug() << "Point: " << point.x << "-" << point.y;
         }
-        qDebug() << "Status: " << (int)result.status();
-        qDebug() << "Ecc: " << result.ecLevel().c_str();
-        qDebug() << "Format: " << (int)result.format();
+        qDebug() << "Status: " << (int)barcode.decodeResult.status();
+        qDebug() << "Ecc: " << barcode.decodeResult.ecLevel().c_str();
+        qDebug() << "Format: " << (int)barcode.decodeResult.format();
         ui->camera1Label->setText(text);
-        */
+
 #endif
     } else {
         ui->camera1Label->setText(QString(""));
