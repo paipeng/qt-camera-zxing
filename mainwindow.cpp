@@ -226,7 +226,7 @@ void MainWindow::updateBarcodeDecodeResult(int decodeState) {
         rect.setTop(rect.top() - offset_y);
 
         rect.setWidth(23*crop_width/21);
-        rect.setHeight(23*crop_height/21);
+        rect.setHeight(rect.width());//23*crop_height/21);
 
 
         qDebug() << "crop rect: " << rect;
