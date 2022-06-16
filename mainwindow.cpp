@@ -215,6 +215,20 @@ void MainWindow::updateBarcodeDecodeResult(int decodeState) {
 
         QRect rect(cropPoints.at(0).x(), cropPoints.at(0).y(), cropPoints.at(1).x() - cropPoints.at(0).x(), cropPoints.at(2).y() - cropPoints.at(1).y());
 
+
+        int crop_width = rect.width();
+        int crop_height = rect.height();
+
+        int offset_x = (23*crop_width/21 - crop_width)/2;
+        int offset_y = (23*crop_height/21 - crop_height)/2;
+
+        rect.setLeft(rect.left() - offset_x);
+        rect.setTop(rect.top() - offset_y);
+
+        rect.setWidth(23*crop_width/21);
+        rect.setHeight(23*crop_height/21);
+
+
         qDebug() << "crop rect: " << rect;
 
         QImage cropped = image.copy(rect);
