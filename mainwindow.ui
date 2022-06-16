@@ -216,7 +216,7 @@
            <widget class="QPushButton" name="registerButton">
             <property name="geometry">
              <rect>
-              <x>310</x>
+              <x>180</x>
               <y>80</y>
               <width>101</width>
               <height>31</height>
@@ -247,6 +247,19 @@
             </property>
             <property name="text">
              <string>start</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="deleteButton">
+            <property name="geometry">
+             <rect>
+              <x>290</x>
+              <y>80</y>
+              <width>113</width>
+              <height>32</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>delete</string>
             </property>
            </widget>
           </widget>
@@ -330,11 +343,45 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>registerButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>registerImage()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>898</x>
+     <y>437</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>479</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>deleteButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>deleteImage()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>884</x>
+     <y>437</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>479</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>startCamera1()</slot>
   <slot>startCamera2()</slot>
   <slot>camera1Changed(int)</slot>
   <slot>camera2Changed(int)</slot>
+  <slot>registerImage()</slot>
+  <slot>deleteImage()</slot>
  </slots>
 </ui>

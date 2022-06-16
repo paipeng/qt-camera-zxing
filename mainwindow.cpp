@@ -3,7 +3,7 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow), camera1(0, this), camera2(1, this), camera1AutoCapture(true), resizeFactor(3)
+    , ui(new Ui::MainWindow), camera1(0, this), camera2(1, this), camera1AutoCapture(true), resizeFactor(3), registerImg(false)
 {
     ui->setupUi(this);
 
@@ -240,6 +240,28 @@ void MainWindow::updateBarcodeDecodeResult(int decodeState) {
 
         ui->cropLabel->setPixmap(pixmap.scaled(w,h,Qt::KeepAspectRatio));
 
+
+
+        if (this->registerImg) {
+            registeredImage = cropped;
+            this->registeredImage.setText("VALID", "OK");
+
+            pixmap = QPixmap::fromImage(registeredImage);
+
+            w = ui->registeredLabel->width();
+            h = ui->registeredLabel->height();
+
+            ui->registeredLabel->setPixmap(pixmap.scaled(w,h,Qt::KeepAspectRatio));
+
+            this->registerImg = false;
+        }
+
+        if (this->registeredImage.text("VALID") == "OK") {
+            qDebug() << "TODO utsch-auth";
+        } else {
+            qDebug() << "registeredImage invalid";
+        }
+
 #endif
     } else {
         ui->camera1Label->setText(QString(""));
@@ -267,5 +289,15 @@ void MainWindow::displayCapturedImage(int cameraId) {
     } else {
         //ui->camera2StackedWidget->setCurrentIndex(1);
     }
+}
+
+void MainWindow::registerImage() {
+    this->registerImg = true;
+}
+
+void MainWindow::deleteImage() {
+    this->registeredImage.setText("VALID", "");
+    QPixmap pixmap;
+    ui->registeredLabel->setPixmap(pixmap);
 }
 

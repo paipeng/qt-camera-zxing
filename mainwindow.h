@@ -28,6 +28,8 @@ private slots:
     void camera1Changed(int index);
     void camera2Changed(int index);
     void updateBarcodeDecodeResult(int decodeState);
+    void registerImage();
+    void deleteImage();
 
 private:
     void cameraState(int cameraId, int state) override;
@@ -52,5 +54,7 @@ private:
     QElapsedTimer timer;
     float resizeFactor;
     QSize imageSize;
+    bool registerImg;
+    QImage registeredImage;
 };
 #endif // MAINWINDOW_H
