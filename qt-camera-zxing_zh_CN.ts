@@ -43,6 +43,11 @@
         <translation type="unfinished">开启摄像头</translation>
     </message>
     <message>
+        <location filename="mainwindow.ui" line="262"/>
+        <source>delete</source>
+        <translation type="unfinished">删除</translation>
+    </message>
+    <message>
         <location filename="mainwindow.cpp" line="12"/>
         <source>app_info</source>
         <translation type="unfinished">Demo @2022 Pai Peng (sipaipv6@gmail.com)</translation>
