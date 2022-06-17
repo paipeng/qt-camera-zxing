@@ -6,6 +6,7 @@
 
 #include "cpcamera.h"
 #include "cpbarcode.h"
+#include "imageutil.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -56,5 +57,7 @@ private:
     QSize imageSize;
     bool registerImg;
     QImage registeredImage;
+
+    ImageUtil imageUtil;
 };
 #endif // MAINWINDOW_H

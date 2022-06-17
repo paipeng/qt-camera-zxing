@@ -231,8 +231,7 @@ void MainWindow::updateBarcodeDecodeResult(int decodeState) {
 
         qDebug() << "crop rect: " << rect;
 
-        QImage cropped = image.copy(rect);
-
+        QImage cropped = imageUtil.convertToGray(image.copy(rect));
         QPixmap pixmap = QPixmap::fromImage(cropped);
 
         int w = ui->cropLabel->width();
